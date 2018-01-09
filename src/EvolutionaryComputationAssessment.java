@@ -12,24 +12,15 @@ public class EvolutionaryComputationAssessment {
     public static void main(String[] args) {
 
         //Configuration variables
-        int numParents = 20;
+        int numParents = 2;
 
         // Initialisation Stage (i.e. preparing the initial population
-        List<Double[]> parents = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-
-            Double[] parent = randomiseSet();
-            parents.add(parent);
-
+        System.out.println("Generating values...");
+        for (int i = 0; i < numParents; i++) {
+            Chromosome chromosome = new Chromosome();
+            chromosome.printValues();
         }
 
-    }
-
-    //Method used to randomise a set of double[] for use within the fitness function
-    public static Double[] randomiseSet() {
-
-
-        return null;
     }
 
     //Method used to combine a set of parents together and create two children
