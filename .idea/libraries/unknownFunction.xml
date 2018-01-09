@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="unknownFunction">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../Java/Java Libraries/ai_datamining_module/unknownFunction.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

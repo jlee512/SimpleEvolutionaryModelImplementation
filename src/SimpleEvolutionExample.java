@@ -20,7 +20,7 @@ public class SimpleEvolutionExample {
 
         getFunctionMaxFullSearch();
 
-//        getFunctionMaxEvolutionarySearch();
+        getFunctionMaxEvolutionarySearch();
 
     }
 
