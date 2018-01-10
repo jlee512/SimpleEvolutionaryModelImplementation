@@ -97,4 +97,15 @@ public class Chromosome {
         System.out.println("Fitness: " + fitness);
 
     }
+
+    public static void main(String[] args) {
+        //Local testing
+//        double[] test = new double[5];
+//        test[0] = -0.5834823837909138;
+//        test[1] = -0.5834823837909138;
+//        test[2] = -0.5834823837909138;
+//        test[3] = -0.5834823837909138;
+//        test[4] = -0.5834823837909138;
+//        System.out.println(OptimisationFunction.unknownFunction(test));
+    }
 }
