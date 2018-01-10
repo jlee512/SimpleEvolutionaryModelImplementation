@@ -10,8 +10,9 @@ public class Chromosome {
     private double[] values;
     private double fitness;
 
-    public Chromosome() {
-        randomiseValues();
+    public Chromosome(double max, double min) {
+        randomiseValues(max, min);
+        calculateFitness();
     }
 
     public double[] getValues() {
@@ -31,34 +32,34 @@ public class Chromosome {
     }
 
     public void calculateFitness() {
-        OptimisationFunction.unknownFunction(values);
+        fitness = OptimisationFunction.unknownFunction(values);
     }
 
     //Method used to randomise a set of double[] for use within the fitness function
-    public void randomiseValues() {
-
-        Random randomGenerator = new Random();
+    public void randomiseValues(double max, double min) {
 
         values = new double[5];
 
         for (int i = 0; i < values.length; i++) {
 
-            double random = randomGenerator.nextDouble() * Double.MAX_VALUE;
-
-            if (randomGenerator.nextBoolean()) {
-                random = -random;
-            }
-
-            values[i] = random;
+            values[i] = Math.random() * (max - min) + min;
         }
     }
 
     public void printValues() {
 
+        System.out.print("Values: ");
         for (int i = 0; i < values.length; i++) {
 
-            System.out.println(values[i] + " ");
+            System.out.print(values[i] + " ");
 
         }
+        System.out.println();
+    }
+
+    public void printFitness() {
+
+        System.out.println("Fitness: " + fitness);
+
     }
 }
