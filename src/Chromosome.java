@@ -19,9 +19,9 @@ public class Chromosome {
     }
 
     //Method to create new chromosome using recombination
-    public Chromosome(Chromosome parent1, Chromosome parent2) {
+    public Chromosome(Chromosome parent1, Chromosome parent2, double max, double min) {
 
-        values = new double [5];
+        values = new double[5];
 
         //Generate random indices to select from each parent
         //Generate parent 1 indices (non-duplicate)
@@ -41,6 +41,20 @@ public class Chromosome {
         }
 
         //Mutation to be added at a later stage
+        //Randomise number of genes to mutate and the specific index to mutate as well as the direction of mutation
+        int numberToMutate = (int) (Math.random() * 6);
+//        System.out.println("Mutating " + numberToMutate + " genes");
+        resetParentIndicesList();
+        for (int i = 0; i < numberToMutate; i++) {
+            int selectedIndex = (int) (Math.random() * parentIndices.size());
+            int mutateIndex = parentIndices.get(selectedIndex);
+//            System.out.println("Index: " + mutateIndex);
+            //Mutate by value within +/-(max - min)/40
+            values[mutateIndex] = values[mutateIndex] + (Math.random() - (max - min) / 40);
+//            System.out.println("Gene mutated");
+            parentIndices.remove(selectedIndex);
+        }
+
 
         //Calculate chromosome fitness
         calculateFitness();

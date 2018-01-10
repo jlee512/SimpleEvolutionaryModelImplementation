@@ -13,12 +13,12 @@ public class EvolutionaryComputationAssessment {
     public static void main(String[] args) {
 
         //Configuration variables
-        int numGenerationZero = 10;
+        int numGenerationZero = 1000;
         int minGenerations = 10;
-        int maxGenerations = 100;
+        int maxGenerations = 200;
         //Setup search space
-        double search_max = 10.0;
-        double search_min = -10.0;
+        double search_max = 10000.0;
+        double search_min = -10000.0;
         //Setup variable to store minimum chromosome
         Chromosome minimum = new Chromosome(search_max, search_min);
 
@@ -32,34 +32,10 @@ public class EvolutionaryComputationAssessment {
 
         while (generation < minGenerations || generation < maxGenerations) {
 
+            //Sort array and update minimum (if lower value has been found)
             minimum = sortAndUpdateMinimum(minimum, chromosomes);
-
-            for (int i = 0; i < 5; i++) {
-                System.out.println(chromosomes.get(i).getFitness());
-            }
-
-            //Select parents for next generation (the 'fittest' chromosomes in the List up to the number of chromosomes in generation zero)
-            System.out.println("Selecting fittest parents...");
-            chromosomes = chromosomes.subList(0, numGenerationZero / 2);
-
-            //Generate offspring from new parents
-            System.out.println("Generating offspring...");
-            int numParents = chromosomes.size();
-
-            for (int i = 0; i < numParents; i++) {
-
-                for (int j = 0; j < numParents; j++) {
-                    //If two different parents, recombine into new offspring and add to chromosomes List
-                    if (i != j) {
-
-                        Chromosome chromosome = new Chromosome(chromosomes.get(i), chromosomes.get(j));
-                        chromosomes.add(chromosome);
-
-                    }
-
-                }
-
-            }
+            //Select fittest parents and generate offspring
+            chromosomes = generateOffspring(numGenerationZero, chromosomes, generation + 1, search_max, search_min);
 
             generation++;
 
@@ -68,6 +44,33 @@ public class EvolutionaryComputationAssessment {
         System.out.println("---- Minimum ----");
         minimum.printValues();
         minimum.printFitness();
+    }
+
+    public static List<Chromosome> generateOffspring(int numGenerationZero, List<Chromosome> chromosomes, int generation, double searchMax, double searchMin) {
+        //Select parents for next generation (the 'fittest' chromosomes in the List up to the number of chromosomes in generation zero)
+//        System.out.println("Selecting fittest parents...");
+        List<Chromosome> fittestParents = chromosomes.subList(0, numGenerationZero / 2);
+        chromosomes = new ArrayList<>();
+
+        //Generate offspring from new parents
+//        System.out.println("Generating offspring for generation " + generation);
+        int numParents = fittestParents.size();
+
+        for (int i = 0; i < numParents; i++) {
+
+            for (int j = 0; j < numParents; j++) {
+                //If two different parents, recombine into new offspring and add to chromosomes List
+                if (i != j) {
+
+                    Chromosome chromosome = new Chromosome(fittestParents.get(i), fittestParents.get(j), searchMax, searchMin);
+                    chromosomes.add(chromosome);
+
+                }
+
+            }
+
+        }
+        return chromosomes;
     }
 
     public static Chromosome sortAndUpdateMinimum(Chromosome minimum, List<Chromosome> chromosomes) {
@@ -99,5 +102,4 @@ public class EvolutionaryComputationAssessment {
         return chromosomes;
     }
 
-    //Method used to combine a set of parents together and create two children
 }
