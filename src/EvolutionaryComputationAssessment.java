@@ -14,11 +14,11 @@ public class EvolutionaryComputationAssessment {
 
         //Configuration variables
         int numGenerationZero = 1000;
-        int minGenerations = 10;
-        int maxGenerations = 200;
+        int minGenerations = 1;
+        int maxGenerations = 3;
         //Setup search space
-        double search_max = 10000.0;
-        double search_min = -10000.0;
+        double search_max = 10.0;
+        double search_min = -10.0;
         //Setup variable to store minimum chromosome
         Chromosome minimum = new Chromosome(search_max, search_min);
 
